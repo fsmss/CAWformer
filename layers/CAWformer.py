@@ -8,22 +8,6 @@ from typing import  Optional
 import numpy as np
 import pywt
 import matplotlib.pyplot as plt
-def visualize_series(original_series, denoised_series, series_index=0, channel_index=0):
-    # 选择某个时间序列和通道进行可视化
-    original_data = original_series.permute(0, 2, 1)[series_index, channel_index, :].cpu().detach().numpy()
-    denoised_data = denoised_series.permute(0, 2, 1)[series_index, channel_index, :].cpu().detach().numpy()
-
-    # 绘制原始数据和去噪后的数据在同一个图上
-    plt.figure(figsize=(10, 6))
-    plt.plot(original_data, label='Original Data', color='blue')
-    plt.plot(denoised_data, label='Denoised Data', color='orange', linestyle='--')
-    
-    plt.title('Original vs Denoised Time Series (Channel {})'.format(channel_index))
-    plt.legend()
-    
-    plt.tight_layout()
-    plt.savefig('comparison_plot.png')  # 保存图片
-    plt.show()  # 显示图像
 class CAWformer(nn.Module):
     def __init__(self,
                  enc_in,
